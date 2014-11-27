@@ -1,4 +1,6 @@
-package com.hmkcode.android.signin;
+package com.iesebre.dam2.pa201415.sergi;
+
+import com.iesebre.dam2.pa201415.sergi.R;
 
 import android.os.Bundle;
 import android.app.Activity;
