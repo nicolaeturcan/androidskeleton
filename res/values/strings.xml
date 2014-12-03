@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Ebre-escool</string>
+    <string name="app_name">InsEbre</string>
     <string name="action_settings">Configuració</string>
-    <string name="hello_world">Hello world!</string>
 
     <style name="ButtonText">
         <item name="android:layout_width">fill_parent</item>

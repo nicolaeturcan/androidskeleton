@@ -1,4 +1,4 @@
-package com.iesebre.dam2.pa201415.sergi;
+package com.iesebre.dam2.pa201415.nicolae;
 
 import java.io.InputStream;
 
@@ -10,7 +10,7 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.iesebre.dam2.pa201415.sergi.R;
+import com.iesebre.dam2.pa201415.nicolae.R;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

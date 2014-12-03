@@ -1,4 +1,4 @@
-package com.iesebre.dam2.pa201415.sergi;
+package com.iesebre.dam2.pa201415.nicolae;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -7,16 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.iesebre.dam2.pa201415.nicolae.R;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
- * must implement the {@link FragmentType0.OnFragmentInteractionListener}
+ * must implement the {@link FragmentType1.OnFragmentInteractionListener}
  * interface to handle interaction events. Use the
- * {@link FragmentType0#newInstance} factory method to create an instance of
+ * {@link FragmentType1#newInstance} factory method to create an instance of
  * this fragment.
  * 
  */
-public class FragmentType0 extends Fragment {
+public class FragmentType1 extends Fragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -36,11 +37,11 @@ public class FragmentType0 extends Fragment {
 	 *            Parameter 1.
 	 * @param param2
 	 *            Parameter 2.
-	 * @return A new instance of fragment FragmentType0.
+	 * @return A new instance of fragment FragmentType1.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static FragmentType0 newInstance(String param1, String param2) {
-		FragmentType0 fragment = new FragmentType0();
+	public static FragmentType1 newInstance(String param1, String param2) {
+		FragmentType1 fragment = new FragmentType1();
 		Bundle args = new Bundle();
 		args.putString(ARG_PARAM1, param1);
 		args.putString(ARG_PARAM2, param2);
@@ -48,7 +49,7 @@ public class FragmentType0 extends Fragment {
 		return fragment;
 	}
 
-	public FragmentType0() {
+	public FragmentType1() {
 		// Required empty public constructor
 	}
 
@@ -65,7 +66,7 @@ public class FragmentType0 extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
-		return inflater.inflate(R.layout.fragment_fragment_type0, container,
+		return inflater.inflate(R.layout.fragment_fragment_type1, container,
 				false);
 	}
 

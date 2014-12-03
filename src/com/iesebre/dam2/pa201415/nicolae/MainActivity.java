@@ -1,4 +1,4 @@
-package com.iesebre.dam2.pa201415.sergi;
+package com.iesebre.dam2.pa201415.nicolae;
 
 import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.iesebre.dam2.pa201415.nicolae.R;
 
 public class MainActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks,FragmentType0.OnFragmentInteractionListener,FragmentType1.OnFragmentInteractionListener {
