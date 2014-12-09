@@ -17,6 +17,7 @@ import com.iesebre.dam2.pa201415.nicolae.R;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.graphics.Bitmap;
@@ -62,6 +63,9 @@ public class LoginActivity extends Activity implements OnClickListener,
 	 */
 	private boolean mIntentInProgress;
 
+	// A flag showing a progress or a status of an activity.
+	private ProgressDialog progressDialog;
+
 	private ConnectionResult mConnectionResult;
 
 	private Button btnGoogleSignIn;
@@ -71,6 +75,10 @@ public class LoginActivity extends Activity implements OnClickListener,
 		Log.d(TAG, "onCreate!");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_activity);
+
+		// Status of the activity.
+		progressDialog = new ProgressDialog(LoginActivity.this);
+		progressDialog.setMessage("Carregant...");
 
 		btnGoogleSignIn = (Button) findViewById(R.id.btn_google_sign_in);
 
@@ -200,6 +208,10 @@ public class LoginActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.btn_google_sign_in:
+
+			progressDialog.show();
+			Log.d("Logout","Google progressDialog successfully started.");
+			
 			// Signin button clicked
 			signInWithGplus();
 			break;
@@ -243,6 +255,11 @@ public class LoginActivity extends Activity implements OnClickListener,
 		Intent i = new Intent(LoginActivity.this, MainActivity.class);
 		startActivityForResult(i, REQUEST_CODE_GOOGLE_LOGIN);
 
+		// STOP PROGRESSDIALOG
+
+		progressDialog.dismiss();
+		Log.d("Logout", " progressDialog successfully finished");
+		
 		// Update the UI after signin
 		updateUI(true);
 
