@@ -6,6 +6,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
@@ -32,7 +34,7 @@ public class LoginActivity extends Activity implements OnClickListener,Connectio
 	// Google client to interact with Google API
 	private GoogleApiClient mGoogleApiClient;
 	
-	private static final int RC_SIGN_IN_GOOGLE = 0;
+	private static final int RC_SIGN_IN_GOOGLE = 3889;
 	
 	private static final String TAG = "LoginActivity";
 	
@@ -41,7 +43,9 @@ public class LoginActivity extends Activity implements OnClickListener,Connectio
 	// Profile pic image size in pixels
 	private static final int PROFILE_PIC_SIZE = 400;
 
-	private static final int REQUEST_CODE_GOOGLE_LOGIN = 10;
+	private static final int REQUEST_CODE_GOOGLE_LOGIN = 91;
+	private static final int REQUEST_CODE_FACEBOOK_LOGIN = 92;
+	private static final int REQUEST_CODE_TWITTER_LOGIN = 93;
 	
 	private static final int SOCIAL_LOGIN_GOOGLE = 101;
 	private static final int SOCIAL_LOGIN_FACEBOOk = 102;
@@ -100,13 +104,21 @@ public class LoginActivity extends Activity implements OnClickListener,Connectio
 			Log.d(TAG, "LOGOUT from google!");
 			//LOGOUT from google
 			if (responseCode == RESULT_OK) {
-				Log.d(TAG, "LOGOUT from google OK. Signing Out from Gplus!");
-				mGoogleApiClient.connect();
+				Log.d(TAG, "LOGOUT from google withe response code RESULT_OK. Signing Out from Gplus!...");
+				//Check if revoke exists!
+				Bundle extras = intent.getExtras();
+				boolean revoke = false;
+				if (extras != null) {
+					revoke = extras.getBoolean(AndroidSkeletonUtils.REVOKE_KEY);
+				}
 				
-				this.OnStartAlreadyConnected = true;
-				this.socialLoginType=SOCIAL_LOGIN_GOOGLE;
-				
-				signOutFromGplus();
+				if (revoke == true) {
+					Log.d(TAG, "LOGOUT and also revoke!...");
+					revokeGplusAccess();
+				} else {
+					Log.d(TAG, "Only LOGOUT (no revoke)...");
+					signOutFromGplus();
+				}
 			}
 			break;
 		default:
@@ -134,10 +146,11 @@ public class LoginActivity extends Activity implements OnClickListener,Connectio
 	protected void onStop() {
 		Log.d(TAG, "onStop!");
 		super.onStop();
-		if (mGoogleApiClient.isConnected()) {
+		/* NOT DISCONNECT! WE will come back after result and OnActivityResult does not executes previously onStart!
+		 
 			Log.d(TAG, "onStop mGoogleApiClient isConnected. Disconnecting...!");
 			mGoogleApiClient.disconnect();
-		}
+		}*/
 	}
 
 	@Override
@@ -145,6 +158,25 @@ public class LoginActivity extends Activity implements OnClickListener,Connectio
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	/**
+	 * Revoking access from google
+	 * */
+	private void revokeGplusAccess() {
+		if (mGoogleApiClient.isConnected()) {
+			Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+			Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient)
+					.setResultCallback(new ResultCallback<Status>() {
+						@Override
+						public void onResult(Status arg0) {
+							Log.e(TAG, "User access revoked!");
+							mGoogleApiClient.disconnect();
+							mGoogleApiClient.connect();
+						}
+
+					});
+		}
 	}
 	
 	/**

@@ -24,7 +24,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_section1">Secció 1</string>
     <string name="title_section2">Secció 2</string>
-    <string name="title_section3">Secció 3</string>
+    <string name="title_section3">Revocar accés</string>
     <string name="title_section4">Sortir</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
